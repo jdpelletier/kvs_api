@@ -1,17 +1,16 @@
+import argparse
 from flask import Flask
 from flask_cors import CORS
-# from flask_sqlalchemy import SQLAlchemy
 
-# db = SQLAlchemy()
+def parse_args():
+    parser = argparse.ArgumentParser(description="Start KVS API")
+    parser.add_argument("--port", type=int, default=0, help='Server Port')
+    return parser.parse_args()
 
 def create_app():
     app = Flask(__name__)
     cors = CORS(app)
     app.config['CORS_HEADERS'] = 'Content-Type'
-
-    # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-    #
-    # db.init_app(app)
 
     import views
 
@@ -20,13 +19,12 @@ def create_app():
     return app
 
 if __name__ == '__main__':
-
+    args = parse_args()
+    port = args.port
     app = create_app()
     host = '0.0.0.0'
-    port = 53897
+    # port = 53897
 
-    # run flask server
     print(f"Starting KVS API: PORT = {port}")
-    # app.run(host=host, port=port)
     app.run(host=host, port=port)
     print("Stopping KVS API.")
