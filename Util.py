@@ -26,7 +26,7 @@ def timeConvert(in_time):
         except ValueError:
             timestamp = datetime.strptime(time, '%Y-%m-%d %H:%M:%S')
         timestamp = timestamp.replace(tzinfo=timezone.utc).astimezone(tz=None)
-        timestamp = timestamp.strftime('%m-%d-%Y %H:%M:%S')
+        timestamp = timestamp.strftime('%-m-%-d-%y %H:%M:%S')
     return timestamp
 
 def getVehicles():
