@@ -51,8 +51,11 @@ def getVehicles():
                 latitude
                 longitude
             }
+            ignition {
+                engineStatus
+            }
         }
-    }
+     }
     }
     """
     
@@ -67,11 +70,13 @@ def getVehicles():
         formatted_car["Vehicle"] = name
         if car["lastData"] is None:
           formatted_car["Location"] = "Disconected"
+          formatted_car["Running"] = "Disconected"
           formatted_car["Last Timestamp"] = "Disconected"
         else:
             location = coordConvert(car["lastData"]["gps"]["longitude"], car["lastData"]["gps"]["latitude"])
             formatted_car["Vehicle"] = name
             formatted_car["Location"] = location
+            formatted_car["Running"] = car["lastData"]["ignition"]["engineStatus"]
             formatted_car["Last Timestamp"] = timeConvert(car["lastData"]["timestamp"])
         formatted_list.append(formatted_car)
     return(json.dumps(sorted(formatted_list, key=lambda x: int(x['Vehicle'][2:4]), reverse=True)))
