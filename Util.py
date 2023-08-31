@@ -19,14 +19,14 @@ def timeConvert(in_time):
     if len(time) < 17:
        timestamp = datetime.strptime(time, '%Y-%m-%d %H:%M')
        timestamp = timestamp.replace(tzinfo=timezone.utc).astimezone(tz=None)
-       timestamp = timestamp.strftime('%m-%d-%Y  %H:%M')
+       timestamp = timestamp.strftime('%-m/%-d/%y  %H:%M')
     else:
         try:
             timestamp = datetime.strptime(time, '%Y-%m-%d %H:%M:%S.%f')
         except ValueError:
             timestamp = datetime.strptime(time, '%Y-%m-%d %H:%M:%S')
         timestamp = timestamp.replace(tzinfo=timezone.utc).astimezone(tz=None)
-        timestamp = timestamp.strftime('%-m-%-d-%y %H:%M:%S')
+        timestamp = timestamp.strftime('%-m/%-d/%y %H:%M:%S')
     return timestamp
 
 def getVehicles():
