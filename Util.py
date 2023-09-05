@@ -65,7 +65,7 @@ def getVehicles():
     data = data["data"]["getVehicles"]
     formatted_list = []
     for car in data:
-        name = car["name"][0:2]
+        name = car["name"][0:4]
         formatted_car = {}
         formatted_car["Vehicle"] = name
         if car["lastData"] is None:
